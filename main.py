@@ -17,14 +17,39 @@ result = webbrowser.get()
 print(result)
 
 def Click():
-    # 변수 정의
-    syn_query = str(e.get()) + " synonym"
-    mean_query = str(e.get())
-    ex_query = str(e.get()) + " example in sentence"
-    krMean_query = str(e.get()) + " 뜻"
+    # 함수 정의
+
+    kword = (e.get())
+    #print(len(kword))
+
+    while kword[-1] == " ":
+        kword = kword[0:-1]
+        #print(kword + "0")
+
+    if kword[-1] == "~":
+        kword = kword[0:-1]
+
+        while kword[-1] == " ":
+            kword = kword[0:-1]
+            # print(kword + "0")
+
+        vType = "Idiom"
+
+    else:
+        vType = "NoIdiom"
+
+    #print(kword+"0")
+
+    syn_query = kword + " synonym"
+    mean_query = kword
+    ex_query = kword + " example in sentence"
+    krMean_query = kword + " 뜻"
 
     syn_url = "https://www.google.com/search?q=" + syn_query
-    mean_url = "https://www.dictionary.com/browse/" + mean_query
+    if vType == "Idiom":
+        mean_url = "https://www.google.com/search?q=" + mean_query + " meaning"
+    elif vType == "NoIdiom":
+        mean_url = "https://www.dictionary.com/browse/" + mean_query
     ex_url = "https://www.google.com/search?q=" + ex_query
     krMean_url = "https://search.naver.com/search.naver?query=" + krMean_query
 
